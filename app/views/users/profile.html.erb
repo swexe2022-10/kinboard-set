@@ -18,7 +18,11 @@
                 <td><%= current_user.created_at.strftime('%Y年%m月%d日') %></td>
             </tr>
             <tr>
-                <th>通算高評価：</th>
+                <th>通算レス数：</th>
+                <td><%= Response.where(user_id: user.id).count  %></td>
+            </tr>
+            <tr>
+                <th>高評価率：</th>
                 <td>てすと</td>
             </tr>
             <tr>
