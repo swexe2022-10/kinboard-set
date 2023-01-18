@@ -1,3 +1,4 @@
+*****
 <% @responses.each do |res| %>
     <% Response.where(user_id: current_user.uid).each do |res| %>
    <p> 
@@ -19,6 +20,3 @@
     <% end %>
 <% end %>
 <%= params[:id] %>
-<p><%= link_to 'レスの追加', new_response_path(id: params[:id]) %></p>
-<p><%= link_to 'スレに戻る', thres_path %></p>
-<p><%= link_to 'トップに戻る', top_main_path %></p>

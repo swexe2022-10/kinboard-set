@@ -1,5 +1,6 @@
 <%= form_for @thre, url: {action: :create} do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>>
     <%= f.label :title, 'タイトル' %>
-    <%= f.text_area :title%>
+    <%= f.text_area :title %>
     <%= f.submit '追加' %>
 <%end%>

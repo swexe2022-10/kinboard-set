@@ -6,5 +6,10 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_user
     
-    
+    def current_thre
+        if params[:thre_id]
+            Thre.find_by(id: params[:thre_id])
+        end
+    end
+    helper_method :current_thre
 end

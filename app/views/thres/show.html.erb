@@ -3,10 +3,9 @@
 <h1><%= thre.title %></h1>
 
 <h2>レス一覧</h2>
-
-<% Response.where(user_id: current_user.uid).each do |res| %>
+<% Response.where(thre_id: params[:id]).each_with_index do |res, index| %>
     <p>
-    <%= res.id %>.
+    <%= index+1 %>.
     投稿者：
     <%= User.find_by(uid: res.user_id).name %>
     <%= res.tdate.strftime("%Y/%m/%d %X") %>
@@ -18,30 +17,40 @@
     <% else %>
            <%= image_tag 'n.png', width: '0px', height: '0px' %><br>
     <% end %>
-    評価：
-    <%= link_to '👍', likes_path(res_id: res.id), method: :post %>
+    評価：👍
     <% like_n = Like.where(response_id: res.id).count %>
-    <% if like_n == 0 %>
-        <%= like_n %>
-    <% elsif like_n >= 10 %>
-        <h class="good_count_2">+<%= like_n %></h>
-    <% else %>
-        <h class="good_count">+<%= like_n %></h>
-    <% end %>
-    　
-    <%= link_to '👎', dislikes_path(res_id: res.id), method: :post %>
+        <% if like_n == 0 %>
+            <%= like_n %>
+        <% elsif like_n >= 10 %>
+            <h class="good_count_2">+<%= like_n %></h>
+        <% else %>
+            <h class="good_count">+<%= like_n %></h>
+        <% end %>
+        👎
     <% dislike_n = Dislike.where(response_id: res.id).count %>
-    <% if dislike_n == 0 %>
-        <%= dislike_n %>
-    <% elsif dislike_n >= 10 %>
-        <h class="bad_count_2">－<%= dislike_n %></h>
+        <% if dislike_n == 0 %>
+            <%= dislike_n %>
+        <% elsif dislike_n >= 10 %>
+            <h class="bad_count_2">－<%= dislike_n %></h>
+        <% else %>
+            <h class="bad_count">－<%= dislike_n %></h>
+        <% end %>
+    <br>
+    <% if Like.find_by(user_id: current_user.id, response_id: res.id) %>
+    <%= link_to '👍(高評価を取り消す)', like_path(res_id: res.id, thre_id: params[:id]), method: :delete %>
     <% else %>
-        <h class="bad_count">－<%= dislike_n %></h>
+    <%= link_to '👍(高評価する)', likes_path(res_id: res.id, thre_id: params[:id]), method: :post %>
     <% end %>
+    <% if Dislike.find_by(user_id: current_user.id, response_id: res.id) %>
+    <%= link_to '👎(低評価を取り消す)', dislike_path(res_id: res.id, thre_id: params[:id]), method: :delete %>
+    <% else %>
+    <%= link_to '👎(低評価する)', dislikes_path(res_id: res.id, thre_id: params[:id]), method: :post %>
+    <% end %>
+
     </p>
 <% end %>
 </div>
 
-<p><%= link_to '投稿する', new_response_path %></p>
+<p><%= link_to '投稿する', new_response_path(thre_id: thre.id) %></p>
 <p><%= link_to 'スレッド一覧に戻る', thres_path %></p>
 <p><%= link_to 'トップに戻る', top_main_path %></p>
