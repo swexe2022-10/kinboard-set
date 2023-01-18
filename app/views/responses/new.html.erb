@@ -1,5 +1,8 @@
+<%= params[:thre_id] %>
+<%= current_thre.title %>
 <p>
 <%= form_for @response , url: {action: :create} do |f| %>
+    <%= f.hidden_field :thre_id, value: params[:thre_id] %>
     <%= f.label :message, 'メッセージ' %>
     <%= f.text_field :message %>
     <%= f.label :image, '画像' %>

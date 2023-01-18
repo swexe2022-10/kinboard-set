@@ -1,5 +1,11 @@
-<%= form_for @user, url: {action: :update} do |f| %>
-    <%= f.label :name, 'ニックネーム' %>
-    <%= f.text_area :name%>
-    <%= f.submit '更新' %>
-<%end%>
+<% if current_user.id == (params[:id]).to_i %>
+    <%= form_for @user, url: {action: :update} do |f| %>
+        <%= f.label :name, 'ニックネーム' %>
+        <%= f.text_area :name%>
+        <%= f.submit '更新' %>
+    <% end %>
+<% else %>
+    自分以外のユーザーのニックネームは変更できません。
+<% end %>
+
+<p><%= link_to 'トップに戻る', top_main_path %></p>

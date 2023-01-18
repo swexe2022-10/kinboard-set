@@ -1,6 +1,7 @@
 class ThresController < ApplicationController
   def index
     @thres = Thre.all
+    @thre_id = params[:thre_id]
   end
   
   def new

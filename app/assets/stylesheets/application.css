@@ -93,6 +93,36 @@ table {
     font-size: larger;
     font-weight: bold
 }
+
+.table_info {
+    border-collapse: collapse;
+    background-color: #FFF; /* 全体の背景色 */
+}
+
+.table_info td {
+    padding: 5px 18px;
+    border: solid 2px #298cda;
+}
+
+.table_info th {
+    padding: 5px 18px;
+    border: solid 2px #298cda;
+    background-color: #d0ebfd;
+}
+
+.table_detail {
+    border-collapse: collapse;
+    background-color: #fff; /* 全体の背景色 */
+}
+
+.table_detail th, td {
+    padding: 5px 18px;
+    border: solid 2px #e99352;
+}
+
+.table_detail th {
+    background-color: #fae4d8;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
