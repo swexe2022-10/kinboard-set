@@ -33,3 +33,4 @@ class ResponsesController < ApplicationController
     @response = Response.find(params[:id])
   end
 end
+
